@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نص متحرك</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      gap: 50px;
+      overflow: hidden;
+    }
+
+    /* شعار */
+    .logo {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff, 0 0 16px #0ff;
+      user-select: none;
+      transform: scale(1.1);
+    }
+
+    /* النصوص المتحركة */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      font-weight: 600;
+      font-size: clamp(22px, 4vw, 40px);
+      white-space: nowrap;
+      position: relative;
+      text-transform: uppercase;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      padding: 10px 0;
+    }
+
+    .marquee__inner {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 12s linear infinite;
+    }
+
+    .marquee__inner span {
+      padding-right: 3rem;
+      color: #0ff;
+      text-shadow: 0 0 6px #0ff, 0 0 12px #0ff;
+    }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .marquee:hover .marquee__inner {
+      animation-play-state: paused;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">☠️༺ 𝙽𝚊𝚍𝚘 ༻☠️</div>
+
+  <!-- النص العربي -->
+  <div class="marquee">
+    <div class="marquee__inner">
+      <span>أنا بكره ريف • أنا بكره ريف • أنا بكره ريف • أنا بكره ريف •</span>
+    </div>
+  </div>
+
+  <!-- النص الإنجليزي -->
+  <div class="marquee">
+    <div class="marquee__inner">
+      <span>I hate rAve • I hate rAve • I hate rAve • I hate rAve •</span>
+    </div>
+  </div>
+</body>
+</html>
