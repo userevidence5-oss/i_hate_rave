@@ -1,89 +1,118 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>نص متحرك</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نص متحرك سلس</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
 
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #0a0a0a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      gap: 50px;
-      overflow: hidden;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  gap: 50px;
+  overflow-x: hidden;
+}
 
-    /* شعار */
-    .logo {
-      font-size: clamp(32px, 6vw, 64px);
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #0ff;
-      text-shadow: 0 0 8px #0ff, 0 0 16px #0ff;
-      user-select: none;
-      transform: scale(1.1);
-    }
+.logo {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgb(255, 99, 221);
+  text-shadow: 0 0 8px rgb(255, 0, 242), 0 0 16px rgb(107, 39, 111);
+  user-select: none;
+}
 
-    /* النصوص المتحركة */
-    .marquee {
-      width: 100%;
-      overflow: hidden;
-      font-weight: 600;
-      font-size: clamp(22px, 4vw, 40px);
-      white-space: nowrap;
-      position: relative;
-      text-transform: uppercase;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-      padding: 10px 0;
-    }
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid rgba(0,255,255,0.2);
+  border-bottom: 1px solid rgba(0,255,255,0.2);
+}
 
-    .marquee__inner {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 12s linear infinite;
-    }
+.marquee__inner {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 15s linear infinite;
+}
 
-    .marquee__inner span {
-      padding-right: 3rem;
-      color: #0ff;
-      text-shadow: 0 0 6px #0ff, 0 0 12px #0ff;
-    }
+.marquee__inner span {
+  padding: 0 2rem;
+  font-size: clamp(22px,4vw,40px);
+  font-weight: 600;
+  color: rgb(215, 255, 71);
+  text-shadow: 0 0 6px rgb(228, 28, 235), 0 0 12px rgb(208, 29, 253);
+}
 
-    @keyframes scroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-    .marquee:hover .marquee__inner {
-      animation-play-state: paused;
-      cursor: pointer;
-    }
-  </style>
+.marquee:hover .marquee__inner {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.deep-text {
+  color: rgb(246, 251, 255);
+  text-align: center;
+  font-size: clamp(18px,3vw,30px);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 85%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-left: 3px solid rgb(225, 225, 225);
+  border-right: 3px solid #0ff;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
+  background: rgba(0,255,255,0.05);
+}
+</style>
 </head>
 <body>
-  <div class="logo">☠️༺ 𝙽𝚊𝚍𝚘 ༻☠️</div>
 
-  <!-- النص العربي -->
-  <div class="marquee">
-    <div class="marquee__inner">
-      <span>أنا بكره ريف • أنا بكره ريف • أنا بكره ريف • أنا بكره ريف •</span>
-    </div>
-  </div>
+<div class="logo">☠️༺ 𝙽𝚊𝚍𝚘 ༻☠️</div>
 
-  <!-- النص الإنجليزي -->
-  <div class="marquee">
-    <div class="marquee__inner">
-      <span>I hate rAve • I hate rAve • I hate rAve • I hate rAve •</span>
-    </div>
+<div class="marquee">
+  <div class="marquee__inner">
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
+    <span>أنا بكره ريف • 🤫 </span>
   </div>
+</div>
+
+<div class="marquee">
+  <div class="marquee__inner">
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+    <span>I hate rAve • </span>
+  </div>
+</div>
+
+<div class="deep-text">
+  If I could give you one thing in life, I would give you the ability to see yourself through my eyes...
+</div>
+
 </body>
 </html>
