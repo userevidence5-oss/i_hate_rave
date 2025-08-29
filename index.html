@@ -129,6 +129,11 @@ body::before {
     display:flex;
     justify-content:center;
     gap:15px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+.social-icons.visible {
+    opacity: 1;
 }
 
 .social-icons a {
@@ -141,17 +146,17 @@ body::before {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05); /* ثابت وشفاف */
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2); /* بدل backdrop-filter */
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 .social-icons a:hover {
     transform: translateY(-5px) scale(1.1);
     color: #ff6f6f;
     box-shadow: 0 0 15px rgba(255,111,111,0.5);
-    background: rgba(255,255,255,0.1); /* ثابت بدون blur */
+    background: rgba(255,255,255,0.1);
 }
 
 .social-icon-svg {
@@ -175,39 +180,52 @@ body::before {
         <p id="ageCountdown">Calculating your age...</p>
     </div>
 
-    <div class="social-icons">
+    <div class="social-icons" id="socialIcons">
         <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
         <a href="https://tellonym.me/nado.sendtea" target="_blank" title="Tellonym">
             <img src="icons8-tellonym.svg" alt="Tellonym Icon" class="social-icon-svg">
         </a>
     </div>
 </div>
-<script>
-function updateAge() {
-    const birthDate = new Date('2001-09-23T00:00:00');
-    const targetAge = 50;
-    const targetDate = new Date(birthDate.getFullYear()+targetAge, birthDate.getMonth(), birthDate.getDate());
-    const now = new Date();
-    let diff = targetDate-now;
-    if(diff<0) diff=0;
-    const years = Math.floor(diff/(1000*60*60*24*365.25));
-    const days = Math.floor((diff/(1000*60*60*24))%365.25);
-    const hours = Math.floor((diff/(1000*60*60))%24);
-    const minutes = Math.floor((diff/(1000*60))%60);
-    const seconds = Math.floor((diff/1000)%60);
-    document.getElementById('ageCountdown').innerText = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-}
-setInterval(updateAge,1000);
-updateAge();
 
-document.addEventListener('DOMContentLoaded',()=>{
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
     const typingElement = document.querySelector('.typing');
-    typingElement.addEventListener('animationend',(event)=>{
-        if(event.animationName==='typing'){
-            typingElement.style.borderRight='none';
+    const socialIcons = document.getElementById('socialIcons');
+    const ageSection = document.querySelector('.age-section');
+
+    typingElement.addEventListener('animationend', (event)=>{
+        if(event.animationName === 'typing'){
+            typingElement.style.borderRight = 'none';
         }
+    });
+
+    function updateAge() {
+        const birthDate = new Date('2001-09-23T00:00:00');
+        const targetAge = 50;
+        const targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
+        const now = new Date();
+        let diff = targetDate - now;
+        if(diff < 0) diff = 0;
+        
+        const years = Math.floor(diff / (1000*60*60*24*365.25));
+        const days = Math.floor((diff / (1000*60*60*24)) % 365.25);
+        const hours = Math.floor((diff / (1000*60*60)) % 24);
+        const minutes = Math.floor((diff / (1000*60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        
+        document.getElementById('ageCountdown').innerText =
+            `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }
+
+    setInterval(updateAge, 1000);
+    updateAge();
+
+    ageSection.addEventListener('animationend', ()=>{
+        socialIcons.classList.add('visible');
     });
 });
 </script>
+
 </body>
 </html>
