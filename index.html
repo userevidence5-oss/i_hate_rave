@@ -171,12 +171,9 @@
         }
 
         .social-icons a {
-            color: #ffffff;
-            font-size: 1.8em;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease;
             text-decoration: none;
-            position: relative;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
@@ -189,17 +186,25 @@
 
         .social-icons a:hover {
             transform: translateY(-5px) scale(1.1);
-            color: #ff6f6f;
             box-shadow: 0 0 15px rgba(255, 111, 111, 0.5);
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .social-icon-svg {
-            width: 60%;
-            height: 60%;
+        /* Unified style for all icons using a common class */
+        .social-icon {
+            width: 25px;
+            height: 25px;
+            filter: invert(1); /* Makes the icon white */
+            transition: filter 0.3s ease;
+        }
+
+        /* Hover effect to change color for all icons */
+        .social-icons a:hover .social-icon {
+            filter: invert(0) sepia(100%) saturate(2000%) hue-rotate(330deg) brightness(1.2); /* Changes icon to pinkish-red */
         }
     </style>
 </head>
+
 <body>
     <div class="glass-box">
         <h1 class="typing">Nado</h1>
@@ -210,9 +215,14 @@
         </div>
 
         <div class="social-icons">
-            <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" title="Instagram">
+                <i class="fab fa-instagram social-icon"></i>
+            </a>
             <a href="https://tellonym.me/nado.sendtea" target="_blank" title="Tellonym">
-                <img src="icons8-tellonym.svg" alt="Tellonym Icon" class="social-icon-svg">
+                <img src="icons8-tellonym.svg" alt="Tellonym Icon" class="social-icon">
+            </a>
+            <a href="#" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin-in social-icon"></i>
             </a>
         </div>
     </div>
