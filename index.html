@@ -2,174 +2,202 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nado ✦ Typing Effect</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: url('image.jpg') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nado ✦ Typing Effect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --card-bg-color: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --text-color: #f0f0f0;
+            --main-font: 'Poppins', sans-serif;
+        }
 
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 0;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--main-font);
+            overflow: hidden;
+        }
 
-    .glass-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 10px 10px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      text-align: center;
-      color: rgb(255, 255, 255);
-      opacity: 0;
-      transform: translateY(50px);
-      animation: slideUp 1.5s ease forwards;
-    }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+        }
 
-    @keyframes slideUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .glass-box {
+            background: var(--card-bg-color);
+            border-radius: 20px;
+            padding: 15px 25px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeInScale 1s ease forwards;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 400px;
+            width: 90%;
+            transition: transform 0.3s ease;
+        }
 
-    .typing {
-      font-size: 2em;
-      font-weight: bold;
-      white-space: nowrap;
-      border-right: 2px solid rgb(255, 255, 255);
-      overflow: hidden;
-      width: 0;
-      animation: typing 3s steps(200, end) forwards, blink 0.7s step-end infinite;
-    }
+        .glass-box:hover {
+            transform: scale(1.02);
+        }
 
-    .typing::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 2px;
-      background: #fff;
-      margin: 5px auto 0;
-      animation: expandLine 2s ease forwards;
-      animation-delay: 3s;
-    }
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    @keyframes expandLine {
-      from {
-        width: 0;
-      }
+        .typing {
+            font-family: 'Times New Roman', serif;
+            font-size: 3.5em;
+            font-weight: bold;
+            white-space: nowrap;
+            border-right: 2px solid var(--text-color);
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(15, end) forwards,
+                blink 0.7s step-end infinite;
+            margin-bottom: 5px;
+        }
 
-      to {
-        width: 80%;
-      }
-    }
+        .typing::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            margin: 5px auto 0;
+            animation: expandLine 1.5s ease forwards;
+            animation-delay: 2s;
+        }
 
-    @keyframes typing {
-      from {
-        width: 0
-      }
+        @keyframes expandLine {
+            from {
+                width: 0;
+            }
 
-      to {
-        width: 100%
-      }
-    }
+            to {
+                width: 70%;
+            }
+        }
 
-    @keyframes blink {
+        @keyframes typing {
+            from {
+                width: 0
+            }
 
-      from,
-      to {
-        border-color: transparent
-      }
+            to {
+                width: 100%
+            }
+        }
 
-      50% {
-        border-color: rgb(255, 255, 255)
-      }
-    }
+        @keyframes blink {
 
-    .quote {
-      margin-top: 15px;
-      font-size: 1.2em;
-      color: rgb(182, 178, 178);
-      opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 3s;
-      /* يظهر بعد انتهاء الكتابة */
-    }
+            from,
+            to {
+                border-color: transparent
+            }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0
-      }
+            50% {
+                border-color: #fff
+            }
+        }
 
-      to {
-        opacity: 1
-      }
-    }
-  </style>
+        .quote {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .age-section {
+            font-size: 1em;
+            color: #ff3b3b;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 10px 12px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 4s;
+        }
+
+        .age-section p {
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="glass-box">
-    <h1 class="typing">Nado</h1>
-    <p class="quote">"Welcome to the glitch side of me"</p>
+    <div class="glass-box">
+        <h1 class="typing">Nado</h1>
+        <p class="quote">"Welcome to the glitch side of me"</p>
 
- <div class="age-section">
-  <p id="ageCountdown">Calculating your age...</p>
-</div>
+        <div class="age-section">
+            <p id="ageCountdown">Calculating your age...</p>
+        </div>
+    </div>
 
-<style>
-  .age-section {
-    font-size: 1.3em;
-    color: #ff1010;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 12px 15px;
-    border-radius: 12px;
-    text-align: center;
-  }
-</style>
+    <script>
+        function updateAge() {
+            const birthDate = new Date('2001-09-23T00:00:00');
+            const targetAge = 50;
+            const targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
+            const now = new Date();
 
-<script>
-  function updateAge() {
-    const birthDate = new Date('2001-09-23T00:00:00');
-    const targetAge = 50;
-    const targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
-    const now = new Date();
+            let diff = targetDate - now;
+            if (diff < 0) diff = 0;
 
-    let diff = targetDate - now;
-    if (diff < 0) diff = 0;
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+            const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365.25);
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-    const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365);
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+            document.getElementById('ageCountdown').innerText =
+                `You have ${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left`;
+        }
 
-    document.getElementById('ageCountdown').innerText =
-      `You have ${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left until 50 years`;
-  }
-
-  setInterval(updateAge, 1000);
-  updateAge();
-</script>
-
-  </div>
+        setInterval(updateAge, 1000);
+        updateAge();
+    </script>
 </body>
 
 </html>
