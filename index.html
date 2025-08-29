@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
             --card-bg-color: rgba(255, 255, 255, 0.1);
@@ -44,7 +44,7 @@
         .glass-box {
             background: var(--card-bg-color);
             border-radius: 20px;
-            padding: 15px 25px;
+            padding: 20px 30px;
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
@@ -54,9 +54,10 @@
             transform: scale(0.9);
             animation: fadeInScale 1s ease forwards;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .glass-box:hover {
@@ -72,15 +73,15 @@
 
         .typing {
             font-family: 'Times New Roman', serif;
-            font-size: 3.5em;
+            font-size: 3.8em;
             font-weight: bold;
             white-space: nowrap;
             border-right: 2px solid var(--text-color);
             overflow: hidden;
             width: 0;
-            animation: typing 2s steps(15, end) forwards,
-                blink 0.7s step-end infinite;
+            animation: typing 2s steps(15, end) forwards, blink 0.7s step-end infinite;
             margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
         .typing::after {
@@ -98,7 +99,6 @@
             from {
                 width: 0;
             }
-
             to {
                 width: 70%;
             }
@@ -108,19 +108,16 @@
             from {
                 width: 0
             }
-
             to {
                 width: 100%
             }
         }
 
         @keyframes blink {
-
             from,
             to {
                 border-color: transparent
             }
-
             50% {
                 border-color: #fff
             }
@@ -128,8 +125,8 @@
 
         .quote {
             margin-top: 15px;
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.85);
             opacity: 0;
             animation: fadeIn 1.5s ease forwards;
             animation-delay: 2.5s;
@@ -139,32 +136,70 @@
             from {
                 opacity: 0
             }
-
             to {
                 opacity: 1
             }
         }
 
         .age-section {
-            font-size: 1em;
-            color: #ff3b3b;
+            font-size: 1.05em;
+            color: #ff6f6f;
             font-weight: 600;
-            background: rgba(0, 0, 0, 0.25);
-            padding: 10px 12px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 15px;
+            border-radius: 12px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
             opacity: 0;
             animation: fadeIn 1.5s ease forwards;
             animation-delay: 4s;
+            box-shadow: inset 0 0 10px rgba(255, 59, 59, 0.2);
         }
 
         .age-section p {
             margin: 0;
         }
+
+        .social-icons {
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 4.5s;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.8em;
+            transition: transform 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: #ff6f6f;
+            box-shadow: 0 0 15px rgba(255, 111, 111, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icon-svg {
+            width: 60%;
+            height: 60%;
+        }
     </style>
 </head>
-
 <body>
     <div class="glass-box">
         <h1 class="typing">Nado</h1>
@@ -173,31 +208,39 @@
         <div class="age-section">
             <p id="ageCountdown">Calculating your age...</p>
         </div>
-    </div>
 
+        <div class="social-icons">
+            <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://tellonym.me/nado.sendtea" target="_blank" title="Tellonym">
+                <img src="icons8-tellonym.svg" alt="Tellonym Icon" class="social-icon-svg">
+            </a>
+        </div>
+    </div>
     <script>
         function updateAge() {
             const birthDate = new Date('2001-09-23T00:00:00');
             const targetAge = 50;
             const targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
             const now = new Date();
-
             let diff = targetDate - now;
             if (diff < 0) diff = 0;
-
             const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
             const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365.25);
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
-
-            document.getElementById('ageCountdown').innerText =
-                `You have ${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left`;
+            document.getElementById('ageCountdown').innerText = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
         }
-
         setInterval(updateAge, 1000);
         updateAge();
+        document.addEventListener('DOMContentLoaded', () => {
+            const typingElement = document.querySelector('.typing');
+            typingElement.addEventListener('animationend', (event) => {
+                if (event.animationName === 'typing') {
+                    typingElement.style.borderRight = 'none';
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
