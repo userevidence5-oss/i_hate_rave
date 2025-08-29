@@ -1,77 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nado ✦ Glitch Profile</title>
+  <title>Nado ✦ Typing Effect</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;              
+      height: 100vh;
       background: url('image.jpg') no-repeat center center fixed;
-      background-size: cover;   /* يخلي الصورة تعبي الشاشة */
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
     }
 
-    /* تأثير Glitch على النص */
-    .glitch {
-      font-size: 3em;
-      font-weight: bold;
-      position: relative;
-      color: #0ff;
-      text-transform: uppercase;
-    }
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
+    body::before {
+      content: "";
       position: absolute;
+      top: 0;
       left: 0;
       width: 100%;
-      overflow: hidden;
-      clip: rect(0, 900px, 0, 0);
-    }
-    .glitch::before {
-      animation: glitchTop 2s infinite linear alternate-reverse;
-      color: #f0f;
-      z-index: -1;
-    }
-    .glitch::after {
-      animation: glitchBottom 2s infinite linear alternate-reverse;
-      color: #ff0;
-      z-index: -2;
-    }
-    @keyframes glitchTop {
-      0% { clip: rect(0, 9999px, 0, 0); }
-      20% { clip: rect(0, 9999px, 50px, 0); transform: translate(-5px, -5px); }
-      40% { clip: rect(0, 9999px, 0, 0); }
-      60% { clip: rect(0, 9999px, 30px, 0); transform: translate(5px, 5px); }
-      80% { clip: rect(0, 9999px, 0, 0); }
-      100% { clip: rect(0, 9999px, 40px, 0); transform: translate(-5px, 0); }
-    }
-    @keyframes glitchBottom {
-      0% { clip: rect(0, 9999px, 0, 0); }
-      20% { clip: rect(10px, 9999px, 60px, 0); transform: translate(5px, 0); }
-      40% { clip: rect(0, 9999px, 0, 0); }
-      60% { clip: rect(20px, 9999px, 70px, 0); transform: translate(-5px, 5px); }
-      80% { clip: rect(0, 9999px, 0, 0); }
-      100% { clip: rect(15px, 9999px, 65px, 0); transform: translate(0, -5px); }
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0;
     }
 
-    /* الكوت */
+    .glass-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 10px 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+      color: rgb(255, 255, 255);
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideUp 1.5s ease forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .typing {
+      font-size: 2em;
+      font-weight: bold;
+      white-space: nowrap;
+      border-right: 2px solid rgb(255, 255, 255);
+      overflow: hidden;
+      width: 0;
+      animation: typing 3s steps(200, end) forwards, blink 0.7s step-end infinite;
+    }
+
+    .typing::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      margin: 5px auto 0;
+      animation: expandLine 2s ease forwards;
+      animation-delay: 3s;
+    }
+
+    @keyframes expandLine {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 80%;
+      }
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: rgb(255, 255, 255)
+      }
+    }
+
     .quote {
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 1.2em;
-      color: #0ff;
-      text-shadow: 0 0 5px #0ff, 0 0 15px #0ff;
+      color: rgb(182, 178, 178);
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 3s;
+      /* يظهر بعد انتهاء الكتابة */
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
     }
   </style>
 </head>
+
 <body>
-  <h1 class="glitch" data-text="Nado">Nado</h1>
-  <p class="quote">"Welcome to the glitch side of me"</p>
+  <div class="glass-box">
+    <h1 class="typing">Nado</h1>
+    <p class="quote">"Welcome to the glitch side of me"</p>
+
+ <div class="age-section">
+  <p id="ageCountdown">Calculating your age...</p>
+</div>
+
+<style>
+  .age-section {
+    font-size: 1.3em;
+    color: #ff1010;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 12px 15px;
+    border-radius: 12px;
+    text-align: center;
+  }
+</style>
+
+<script>
+  function updateAge() {
+    const birthDate = new Date('2001-09-23T00:00:00');
+    const targetAge = 50;
+    const targetDate = new Date(birthDate.getFullYear() + targetAge, birthDate.getMonth(), birthDate.getDate());
+    const now = new Date();
+
+    let diff = targetDate - now;
+    if (diff < 0) diff = 0;
+
+    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+    const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 365);
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('ageCountdown').innerText =
+      `You have ${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left until 50 years`;
+  }
+
+  setInterval(updateAge, 1000);
+  updateAge();
+</script>
+
+  </div>
 </body>
+
 </html>
